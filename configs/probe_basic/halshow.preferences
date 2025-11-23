@@ -1,0 +1,44 @@
+# Halshow settings
+# This file is generated automatically.
+wm geometry . 700x773+610+64
+placeFrames 0.438953488372093
+set ::ratio 0.438953488372093
+set ::old_w_leftf 160
+set ::watchlist {
+    pin+lcec.0.A6X.actual-position
+    pin+lcec.0.A6X.actual-torque
+    pin+lcec.0.A6X.actual-velocity
+    pin+lcec.0.A6X.control-mode
+    pin+lcec.0.A6X.target-position
+    pin+lcec.0.A6X.target-velocity
+    sig+a-drv-act-pos
+    pin+lcec.0.A6A.actual-position
+    pin+lcec.0.A6A.actual-torque
+    pin+lcec.0.A6A.actual-velocity
+    pin+lcec.0.A6A.control-mode
+    pin+lcec.0.A6A.control-word
+    pin+lcec.0.A6A.target-velocity
+    pin+lcec.0.1008modul1.din-0
+    pin+lcec.0.1008modul1.din-1
+    pin+lcec.0.1008modul1.din-2
+    pin+lcec.0.1008modul1.din-3
+    pin+lcec.0.1008modul1.din-4
+    pin+lcec.0.1008modul1.din-5
+    pin+lcec.0.1008modul1.din-6
+    pin+lcec.0.1008modul1.din-7
+    pin+lcec.0.1088modul1.din-0
+    pin+lcec.0.1088modul1.din-1
+    pin+lcec.0.1088modul1.din-2
+    pin+lcec.0.1088modul1.din-4
+    pin+lcec.0.1088modul1.din-5
+    pin+lcec.0.1088modul1.din-6
+    pin+lcec.0.1088modul1.din-7
+    pin+lcec.0.1088modul1.din-3
+}
+set ::workmode watchhal
+set ::watchInterval 100
+set ::col1_width 100
+set ::ffmts 
+set ::ifmts 
+set ::alwaysOnTop 0
+set ::autoSaveWatchlist 1
