@@ -58,16 +58,16 @@ net coolant-mist  =>  lcec.0.2088modul1.dout-0
 #*******************
 
 # --- TLS-Dust-Remove ---
-net tls-clean-out   motion.digital-out-04   => lcec.0.2088modul1.dout-6
+net tls-clean-out   motion.digital-out-04   => lcec.0.2088modul1.dout-5
 
 # --- PROBE-IN ---
-#net probe-in     <=  lcec.0.1088modul1.din-2
+#net probe-in     <=  lcec.0.1088modul1.din-0
 
 # --- TLS-Normal-IN ---
-net tls-in       <=  lcec.0.1008modul1.din-4-not
+#net tls-in       <=  lcec.0.1008modul1.din-6-not
 
 # --- TLS-Overtravel-IN ---
-#net tls-over-in  <=  lcec.0.1008modul1.din-8-not
+#net tls-over-in  <=  lcec.0.1008modul1.din-7-not
 
 loadrt or2 names=or.probeortls
 addf or.probeortls servo-thread
@@ -83,10 +83,10 @@ net probe-tool motion.probe-input
 #*******************
 
 # --- Toolclamp-IN ---
-#net toolclamp-in   motion.digital-in-11   <=  lcec.0.1008_1.din-3
+#net toolclamp-in   motion.digital-in-11   <=  lcec.0.1008_1.din-5
 
 # --- Toolrelease-IN ---
-#net toolrelease-in   motion.digital-in-12   <=  lcec.0.1008_1.din-7
+#net toolrelease-in   motion.digital-in-12   <=  lcec.0.1008_1.din-6
 
 
 #*******************
