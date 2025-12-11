@@ -1,6 +1,6 @@
 # Halshow settings
 # This file is generated automatically.
-wm geometry . 1132x877+80+27
+wm geometry . 1132x877+216+92
 placeFrames 0.438953488372093
 set ::ratio 0.438953488372093
 set ::old_w_leftf 160
@@ -18,26 +18,27 @@ set ::watchlist {
     pin+lcec.0.A6A.control-mode
     pin+lcec.0.A6A.control-word
     pin+lcec.0.A6A.target-velocity
-    pin+lcec.0.1008modul1.din-0
-    pin+lcec.0.1008modul1.din-1
-    pin+lcec.0.1008modul1.din-2
-    pin+lcec.0.1008modul1.din-3
-    pin+lcec.0.1008modul1.din-4
-    pin+lcec.0.1008modul1.din-5
-    pin+lcec.0.1008modul1.din-6
-    pin+lcec.0.1008modul1.din-7
-    pin+lcec.0.1088modul1.din-0
-    pin+lcec.0.1088modul1.din-1
-    pin+lcec.0.1088modul1.din-2
-    pin+lcec.0.1088modul1.din-4
-    pin+lcec.0.1088modul1.din-5
-    pin+lcec.0.1088modul1.din-6
-    pin+lcec.0.1088modul1.din-7
-    pin+lcec.0.1088modul1.din-3
     sig+max-home-z
+    param+lcec.0.2088modul1.dout-0-invert
+    param+lcec.0.2088modul1.dout-1-invert
+    param+lcec.0.2088modul1.dout-2-invert
+    param+lcec.0.2088modul1.dout-3-invert
+    param+lcec.0.2088modul1.dout-4-invert
+    param+lcec.0.2088modul1.dout-5-invert
+    param+lcec.0.2088modul1.dout-6-invert
+    param+lcec.0.2088modul1.dout-7-invert
     pin+lcec.0.2088modul1.dout-0
-    pin+lcec.0.1088modul1.din-7-not
+    pin+lcec.0.2088modul1.dout-1
+    pin+lcec.0.2088modul1.dout-2
+    pin+lcec.0.2088modul1.dout-3
+    pin+lcec.0.2088modul1.dout-4
     pin+lcec.0.2088modul1.dout-5
+    pin+lcec.0.2088modul1.dout-6
+    pin+lcec.0.2088modul1.dout-7
+    sig+min-home-x
+    sig+min-home-y
+    pin+lcec.0.1008modul1.din-0
+    pin+lcec.0.1088modul1.din-2
 }
 set ::workmode watchhal
 set ::watchInterval 100

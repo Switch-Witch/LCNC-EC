@@ -1,0 +1,98 @@
+# vfd.hal
+# Optidrive E3 über MB2HAL an LinuxCNC
+# Voraussetzung: optidrive_mb2hal.ini im gleichen Konfigurationsordner
+
+# --- MB2HAL laden ---
+loadusr -W mb2hal config=optidrive_mb2hal.ini
+
+# --- benötigte HAL-Komponenten laden ---
+# mux2: Start/Stop-Wort für Steuerwort-Register 1
+# scale: Skalierung von RPM -> Reg2 (Hz x10) und zurück
+loadrt mux2 count=1
+loadrt scale count=2
+
+addf mux2.0      servo-thread
+addf scale.0     servo-thread
+addf scale.1     servo-thread
+
+
+# ===========================
+# 1) Steuerwort (Register 1)
+# ===========================
+# Register 1 ist das „Umrichtersteuerbefehl“-Wort:
+#   Bit 0 = 0 Stop, 1 Run
+#   Bit 2 = Fehlerquittierung
+# Wir schicken hier nur 0 oder 1 (nur Start/Stop über Bit 0).
+# Für Reset / weitere Bits kannst du später erweitern.
+
+# mux2: in0 = 0 (Stop), in1 = 1 (Run)
+setp mux2.0.in0 0
+setp mux2.0.in1 1
+
+# Spindel-Ein-Signal von LinuxCNC als Auswahl
+# (je nach Config: motion.spindle-on, motion.spindle-forward, etc.)
+net spindle-enable  spindle.0.on => mux2.0.sel
+
+# Ergebnis an MB2HAL-Schreibpin für Register 1
+# Pinname aus ini: HAL_TX_NAME=optidrive_cmd, NELEMENTS=1
+# -> mb2hal.optidrive_cmd.00 (float in)
+net optidrive-cmd-word mux2.0.out => mb2hal.optidrive_cmd.00
+
+
+# =====================================
+# 2) Frequenz-Sollwert (Register 2)
+# =====================================
+# Register 2: „Modbus-Drehzahlsollwert“ in Hz x 10
+# Beispiel: 100 = 10,0 Hz
+
+# Wir gehen hier davon aus, dass motion.spindle-speed-out in U/min (RPM) ist.
+# Umrechnung:
+#   Hz = RPM / 60
+#   Reg2 = Hz * 10 = RPM / 6
+# also Gain = 1/6 ≈ 0.1666667
+
+setp scale.0.gain   0.1666667
+setp scale.0.offset 0
+
+# RPM-Befehl aus LinuxCNC
+net spindle-speed-rpm   spindle.0.speed-out-abs => scale.0.in
+
+# Skalierten Wert an Register 2 schreiben:
+# HAL_TX_NAME=optidrive_freq -> mb2hal.optidrive_freq.00
+net optidrive-freq-cmd  scale.0.out => mb2hal.optidrive_freq.00
+
+
+# =========================================
+# 3) Istwerte (Ausgangsfrequenz + Strom)
+# =========================================
+# TRANSACTION_02 liest:
+#   Reg 7: Ausgangsfrequenz (Hz x10)
+#   Reg 8: Motorstrom (A x10)
+
+# Frequenz-Istwert: mb2hal.optidrive_mon.00
+net optidrive-freq-fb-raw   mb2hal.02.00.float
+
+# Motorstrom-Istwert: mb2hal.istwert.01
+net optidrive-current-fb-raw mb2hal.02.01.float
+
+# Frequenz zurück in RPM für LinuxCNC-Spindelfeedback:
+#   Reg7_Wert = Hz * 10
+#   Hz = Reg7 / 10
+#   RPM = Hz * 60 = Reg7 * 6
+# also Gain = 6.0
+
+setp scale.1.gain   6.0
+setp scale.1.offset 0
+
+net optidrive-freq-fb-raw   => scale.1.in
+#net spindle-speed-fb-rpm    scale.1.out => qtpyvcp.spindle-encoder-rpm.in
+
+
+# ======================
+# 4) Optionale Signale
+# ======================
+# Du kannst die rohen Werte z.B. in ein Panel legen (HAL-Meter, PyVCP, Gmoccapy etc.)
+
+# z.B. Netz alias für bessere Lesbarkeit:
+#net vfd-output-frequency     optidrive-freq-fb-raw
+#net vfd-output-current       optidrive-current-fb-raw

@@ -4,8 +4,8 @@
 
 # Load kinematics and motion modules
 loadrt [KINS]KINEMATICS
-#loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS num_dio=16
-loadrt [EMCMOT]EMCMOT servo_period_nsec=1000000 num_joints=4 num_dio=16
+loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS num_dio=16
+#loadrt [EMCMOT]EMCMOT servo_period_nsec=1000000 num_joints=4 num_dio=16
 loadrt logic names=estop personality=0x103
 addf estop servo-thread
 
@@ -32,7 +32,7 @@ addf	cia402.3.write-all		servo-thread
 addf	lcec.write-all			servo-thread
 
 # Enable EMC control
-setp iocontrol.0.emc-enable-in 1
+#setp iocontrol.0.emc-enable-in 1
 
 #*******************
 #  Endstops
@@ -64,18 +64,18 @@ net tls-clean-out   motion.digital-out-04   => lcec.0.2088modul1.dout-6
 #net probe-in     <=  lcec.0.1088modul1.din-2
 
 # --- TLS-Normal-IN ---
-net tls-in       <=  lcec.0.1008modul1.din-4-not
+net tls-in       <=  lcec.0.1008modul1.din-3-not
 
 # --- TLS-Overtravel-IN ---
-#net tls-over-in  <=  lcec.0.1008modul1.din-8-not
+net tls-over-in  <=  lcec.0.1008modul1.din-7-not
 
-loadrt or2 names=or.probeortls
-addf or.probeortls servo-thread
+#loadrt or2 names=or.probeortls
+#addf or.probeortls servo-thread
 
-net probe-in or.probeortls.in0
-net tls-in or.probeortls.in1
-net probe-tool or.probeortls.out
-net probe-tool motion.probe-input
+#net probe-in or.probeortls.in0
+#net tls-in or.probeortls.in1
+#net probe-tool or.probeortls.out
+#net probe-tool motion.probe-input
 
 
 #*******************
@@ -100,6 +100,7 @@ net air-in-out   motion.digital-out-01   => lcec.0.2088modul1.dout-2
 net air-return-out   motion.digital-out-02   => lcec.0.2088modul1.dout-5
 
 net dust-removal-out   motion.digital-out-03   => lcec.0.2088modul1.dout-1
+
 
 
 # ------------------------------

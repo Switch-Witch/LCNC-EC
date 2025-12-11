@@ -4,12 +4,10 @@
 			<slave idx="1" type="EL1088" name="1088modul1"/>
 			<slave idx="2" type="EL1008" name="1008modul1"/>
 			<slave idx="3" type="EL1008" name="1008modul2"/>
-			<slave idx="4" type="EL1008" name="1008modul3"/>
-			<slave idx="5" type="EL2008" name="2008modul1"/>
-			<slave idx="6" type="EL2008" name="2008modul2"/>
-			<slave idx="7" type="EL2088" name="2088modul1"/>
+			<slave idx="4" type="EL2008" name="2008modul1"/>
+			<slave idx="5" type="EL2088" name="2088modul1"/>
 		<!-- Z Axis StepperOnline A6 Servo Drive -->
-		<slave idx="8" type="generic" vid="00400000" pid="00000715" configPdos="true" name="A6Z">
+		<slave idx="6" type="generic" vid="00400000" pid="00000715" configPdos="true" name="A6Z">
 			<dcConf assignActivate="300" sync0Cycle="*1" sync0Shift="25000"/>
 			<watchdog divider="2498" intervals="1000"/>
 			<syncManager idx="2" dir="out">
@@ -31,7 +29,7 @@
 			</syncManager>
 		</slave>
 		<!-- X Axis StepperOnline A6 Servo Drive -->
-		<slave idx="9" type="generic" vid="00400000" pid="00000715" configPdos="true" name="A6X">
+		<slave idx="7" type="generic" vid="00400000" pid="00000715" configPdos="true" name="A6X">
 			<dcConf assignActivate="300" sync0Cycle="*1" sync0Shift="25000"/>
 			<watchdog divider="2498" intervals="1000"/>
 			<syncManager idx="2" dir="out">
@@ -53,7 +51,7 @@
 			</syncManager>
 		</slave>
 		<!-- Y Axis StepperOnline A6 Servo Drive -->
-		<slave idx="10" type="generic" vid="00400000" pid="00000715" configPdos="true" name="A6Y">
+		<slave idx="8" type="generic" vid="00400000" pid="00000715" configPdos="true" name="A6Y">
 			<dcConf assignActivate="300" sync0Cycle="*1" sync0Shift="25000"/>
 			<watchdog divider="2498" intervals="1000"/>
 			<syncManager idx="2" dir="out">
@@ -75,7 +73,7 @@
 			</syncManager>
 		</slave>
 		<!-- A Axis StepperOnline A6 Servo Drive -->
-		<slave idx="11" type="generic" vid="00400000" pid="00000715" configPdos="true" name="A6A">
+		<slave idx="9" type="generic" vid="00400000" pid="00000715" configPdos="true" name="A6A">
 			<dcConf assignActivate="300" sync0Cycle="*1" sync0Shift="25000"/>
 			<watchdog divider="2498" intervals="1000"/>
 			<syncManager idx="2" dir="out">
